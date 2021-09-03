@@ -1086,7 +1086,7 @@
   let dataU;
 
 
-  fetch('http://localhost:3000/dataURL.txt')
+  fetch('https://api.harmural.one/dataURL.txt')
     .then(function (response) {
       if (draw !== "draw" || draw !== "eraser") {
         console.log(response.body);
@@ -1155,7 +1155,7 @@
     document.getElementById("colorprice").style.display = 'none';
 
     if (draw !== "draw" || draw !== "eraser") {
-      fetch('http://localhost:3000/dataURL.txt').then(function (response) {
+      fetch('https://api.harmural.one/dataURL.txt').then(function (response) {
         console.log(response.body);
         response.text().then(function (text) {
           imageObj.src = text;
