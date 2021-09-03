@@ -783,82 +783,254 @@
   });
 
 
-  const abi = [{
-    "anonymous": false,
-    "inputs": [{"indexed": false, "internalType": "uint256", "name": "x", "type": "uint256"}, {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "y",
-      "type": "uint256"
-    }, {"indexed": false, "internalType": "address", "name": "owner", "type": "address"}, {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "soldPrice",
-      "type": "uint256"
-    }, {"indexed": false, "internalType": "bytes3", "name": "color", "type": "bytes3"}],
-    "name": "PixelChanged",
-    "type": "event"
-  }, {
-    "inputs": [],
-    "name": "NumberPixelChanged",
-    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [],
-    "name": "basePrice",
-    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256[]", "name": "x", "type": "uint256[]"}, {
-      "internalType": "uint256[]",
-      "name": "y",
-      "type": "uint256[]"
-    }, {"internalType": "bytes3[]", "name": "color", "type": "bytes3[]"}],
-    "name": "colorMultiplePixel",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256", "name": "x", "type": "uint256"}, {
-      "internalType": "uint256",
-      "name": "y",
-      "type": "uint256"
-    }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
-    "name": "colorPixel",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  }, {
-    "inputs": [],
-    "name": "getBalance",
-    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}, {
-      "internalType": "uint256",
-      "name": "",
-      "type": "uint256"
-    }],
-    "name": "pixels",
-    "outputs": [{"internalType": "address", "name": "owner", "type": "address"}, {
-      "internalType": "uint256",
-      "name": "soldPrice",
-      "type": "uint256"
-    }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256", "name": "amount", "type": "uint256"}],
-    "name": "withdraw",
-    "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }];
+  const abi = [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "x",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "y",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "soldPrice",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes3",
+          "name": "color",
+          "type": "bytes3"
+        }
+      ],
+      "name": "PixelChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "x",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "y",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "bytes3[]",
+          "name": "color",
+          "type": "bytes3[]"
+        }
+      ],
+      "name": "colorMultiplePixel",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "x",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "y",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes3",
+          "name": "color",
+          "type": "bytes3"
+        }
+      ],
+      "name": "colorPixel",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "basePrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "NumberPixelChanged",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "pixels",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "soldPrice",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes3",
+          "name": "color",
+          "type": "bytes3"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "users",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalPixels",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentPixels",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ];
 
-  const address = '0x7a1f208DD13E43cD974ABAFB0B8a1BACfa009f81';
+  const address = '0xF7EFBc5D75dd12a9bDEeF17c04AB42BC53DF0D3b';
 
   contract = new web3.eth.Contract(abi, address);
 
