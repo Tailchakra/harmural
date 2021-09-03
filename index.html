@@ -128,7 +128,6 @@
       margin: 0;
       border: none;
       box-shadow: none;
-      border-radius: 100px;
       background: none;
       margin-bottom: 20px;
     }
@@ -139,7 +138,6 @@
 
     #colorpick::-webkit-color-swatch {
       border: none;
-      border-radius: 15px;
     }
 
     #colorpick:nth-child(2) {
@@ -147,56 +145,48 @@
       margin: 0;
       border: none;
       box-shadow: none;
-      border-radius: 50px;
       background: #f0bc12;
       outline: none;
     }
 
     #colorpick {
       z-index: 1;
-      position: absolute;
-      transform: translate(0, -50%);
-      border-radius: 4px;
       border: none;
       height: 50px;
       width: 50px;
-      top: 50%;
-      left: 15%;
       cursor: pointer;
     }
 
     #paintlogo {
+      height: 50px;
+      width: 50px;
+      padding-left: 3rem;
+      padding-right: 3rem;
       z-index: 1;
-      position: absolute;
       display: inline;
-      bottom: 50%;
-      right: 50%;
-      transform: translate(50%, 50%);
       cursor: pointer;
     }
 
     #eraserlogo {
+      height: 50px;
+      width: 50px;
       z-index: 1;
-      position: absolute;
       display: inline;
-      bottom: 50%;
-      right: 25%;
-      transform: translate(50%, 50%);
       cursor: pointer;
     }
 
     #drawbar {
+      text-align: center;
+      padding-top: 15px;
       z-index: 1;
       position: absolute;
       display: inline;
-      bottom: 30px;
-      right: 50%;
+      bottom: 0;
+      left: 0;
       height: 70px;
-      width: 300px;
-      border-radius: 50px;
+      width: 100%;
       background: #3c5e8b;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
-      transform: translate(50%, 0);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
     }
 
     #colorwithprice {
@@ -219,13 +209,13 @@
       z-index: 1;
       position: absolute;
       display: none;
-      bottom: 65px;
+      bottom: 90px;
       right: 50%;
       height: 30px;
       width: 200px;
       border-radius: 50px;
       background: linear-gradient(225deg, #fcdb03 0%, #e7c907 100%);
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
       transform: translate(50%, 0);
     }
 
@@ -249,7 +239,7 @@
       border-radius: 50px;
       background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
     }
@@ -282,7 +272,7 @@
       border-radius: 50px;
       background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
     }
@@ -315,7 +305,7 @@
       border-radius: 50px;
       background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
     }
@@ -348,7 +338,7 @@
       border-radius: 50px;
       background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
     }
@@ -374,7 +364,7 @@
       border-radius: 50px;
       background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
     }
@@ -430,7 +420,7 @@
       left: 205px;
       width: 100px;
       background-color: #000000;
-      outline:none;
+      outline: none;
       color: white;
       text-align: center;
       font-family: 'Balsamiq Sans', cursive;
@@ -495,7 +485,7 @@
       display: inline;
       top: 0px;
       left: 0px;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
       width: 325px;
       height: 150px;
       background-color: #3c5e8b;
@@ -538,8 +528,8 @@
   </div>
   <div id="drawbar">
     <input id="colorpick" type="Color"/>
-    <img id="paintlogo" src="pencil.svg" />
-    <img id="eraserlogo" src="eraser.svg" />
+    <img id="paintlogo" src="pencil.svg"/>
+    <img id="eraserlogo" src="eraser.svg"/>
     <div id="colorprice">
       <p id="colorwithprice"></p>
     </div>
@@ -917,135 +907,9 @@
   });
 
 
-  /*window.onload = function() {
-    const api_url = "https://oneplace-canvas.herokuapp.com/";
-    async function getDataURL() {
-      const response = await fetch(api_url);
-      const data = await response.text();
-      console.log(data);
-    }
-    getDataURL();
-  };*/
-
-
-
-
-  /*function writePixelWithEvent(event) {
-        let { x, y, color } = event.returnValues;
-        writePixel(
-          parseInt(x),
-          parseInt(y),
-          parseColor(color)
-        );
-      }
-
-
-  function parseColor(rawColor) {
-    let rgb = [];
-    for (let i = 0; i < rawColor.length; i += 2) {
-      let chunk = rawColor.substring(i, i + 2);
-      if (chunk !== '0x') {
-        rgb.push(parseInt(chunk, 16).toString(10));
-      }
-    }
-    return rgb;
-  }*/
-
   let canvas = document.getElementById('canvas');
   let ctx = canvas.getContext('2d');
   let img = document.getElementById("canvasImage");
-
-
-  /*function writePixel(x, y, color) {
-
-    let imageData = ctx.getImageData(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-    );
-    let data = imageData.data;
-
-    // grab the existing image data
-
-    // notice that canvas is in scope here
-    let columns = canvas.width;
-    let rows = canvas.height;
-
-    // Now, finding the index is a little tricky, because the image data is a
-    // one-dimensional array.
-    //
-    // How do we find the index in a one-dimensional array? First we'll take the
-    // y-value times the number of columns plus the x value, times 4. Why four?
-    // Because we have one byte per channel per pixel.
-    //
-    // If that seems confusing, try to work it out on paper, but honestly
-    // understanding the layout of this image array it's not that crucial to building
-    // this app. This _is_ how you find the index.
-
-    let i = (y * columns + x) * 4;
-
-    // Now we will assign the pixel in data each channel of our pixel in color.
-    data[i] = color[0];
-    data[i + 1] = color[1];
-    data[i + 2] = color[2];
-
-
-    // I want every pixel to be opaque, that is, no transparency, so I'll set the
-    // alpha channel to 255. If you don't do this, your pixels will be invisible.
-    data[i + 3] = 255; // alpha
-
-    // And lastly, we put the image data back into the canvas.
-    // You might see this and realize that we're rewriting the canvas on every pixel.
-    // You could certainly batch these updates, but we're not going to, just for
-    // simplicity.
-    ctx.putImageData(imageData, 0, 0);
-
-    /*ctx.fillStyle = "rgba("+color[0]+","+color[1]+","+color[2]+","+255+")";
-    ctx.fillRect( x, y, 1, 1 );
-
-
-    canvas.toBlob((blob) => {
-      img.src = URL.createObjectURL(blob);
-      imageObj.src = img.src;
-    })*/
-
-  /*canvas.toBlob((blob) => {
-    img.src = URL.createObjectURL(blob);
-    imageObj.src = img.src;
-    blocknb++
-    if (blocknb == pastblocks) {
-      console.log("done")
-    }
-    //console.log(URL.createObjectURL(blob))
-  })
-
-
-
-  layer.batchDraw();
-
-
-  }*/
-
-
-
-
-
-
-
-  /*contract.getPastEvents(
-    'PixelChanged',
-    {
-      fromBlock: pastblocks
-    },
-    function(error, events) {
-      console.log('events : ', events);
-
-      pastblocks = events.length;
-      console.log(pastblocks)
-      events.map(e => writePixelWithEvent(e));
-    }
-  );*/
 
   web3.eth.getBlockNumber(function (error, blocknumber) {
     let lastBlock = blocknumber;
@@ -1136,9 +1000,6 @@
     layer.batchDraw();
   };
 
-  //let imageCanvas = document.getElementById('canvas');
-  //let img = document.getElementById("canvasImage");
-
   let dataU;
 
 
@@ -1168,32 +1029,8 @@
       }
     });
 
-
-  //imageObj.src = Canvas2Image.convertToPNG(imageCanvas);
-
   let grouplines = new Konva.Group();
   layer.add(grouplines);
-
-
-  /*for (i = 0; i < 1001; i++) {
-    let lineX1 = width/4 + height/4 + i * height/2 / 1000;
-    let lineY1 = height/4;
-    let lineX2 = width/4 + height/4 + i * height/2 / 1000;
-    let lineY2 = 3 * height/4;
-    let linever = new Konva.Line({
-        points: [lineX1, lineY1, lineX2, lineY2],
-        stroke: '#adadad',
-        strokeWidth: 0.03
-    });
-    grouplines.add(linever);
-    let linehor = new Konva.Line({
-        points: [lineY2 + height/2 +11.5, lineX2 - height/2 - 11.5, lineY1 + height/2 + 11.5, lineX1 - height/2 -11.5],
-        stroke: '#adadad',
-        strokeWidth: 0.03
-    });
-    grouplines.add(linehor);
-  }*/
-
 
   imageLine.src = './grid.png';
   document.getElementById("gridON").value = "Off";
@@ -1230,7 +1067,6 @@
       y: height / 2
     };
 
-    //let pointer = stage.getPointerPosition();
     console.log(pointer)
 
     let mousePointTo = {
@@ -1335,8 +1171,6 @@
       let posX = parseInt((4000 / height / 2.96298) * (pos.x - (width / 2 - height / 2.7)));
       let posY = parseInt((4000 / height / 2.96298) * (pos.y - height / 4.5));
 
-      //let posX = parseInt(4000 / height/2 * (pos.x - (width/2 - height/2.7)));
-      //let posY = parseInt(4000 / height/2 * (pos.y - height/1.35) - 1000);
       let coo = {x: posX, y: posY};
 
       let rect = document.getElementById('infopanel');
@@ -1372,10 +1206,6 @@
       rect.style.display = 'inline'
       rect.style.left = stage.getPointerPosition().x + 100 + 'px'
       rect.style.top = stage.getPointerPosition().y - 25 + 'px'
-      //button.style.display = 'inline'
-      //button.style.left = window.event.clientX + 70 + 'px'
-      //button.style.top = window.event.clientY + 65 + 'px'
-
 
       layer.batchDraw();
     } else if (draw == "draw") {
@@ -1548,10 +1378,7 @@
       //console.log(URL.createObjectURL(blob))
     })
 
-
     layer.batchDraw();
-
-
   }
 
   document.getElementById("gridON").addEventListener("click", function () {
