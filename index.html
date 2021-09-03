@@ -34,11 +34,11 @@
     }
 
     #nb_text {
-      z-index: 1;
       position: absolute;
-      left: 55px;
-      right: 400px;
-      bottom: 89.65%;
+      top: 160px;
+      text-align: center;
+      width: 100%;
+      z-index: 1;
 
       font-family: Overpass Mono;
       font-style: normal;
@@ -50,85 +50,10 @@
       text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     }
 
-    #nbpixels {
-      z-index: 1;
-      position: absolute;
-      left: 10px;
-      right: 76.18%;
-      top: 145px;
-      bottom: 85.74%;
-      filter: drop-shadow(0 0 0.4rem #000000);
-    }
-
-    #welcome_text {
-      z-index: 1;
-      position: absolute;
-      left: 55px;
-      right: 300px;
-      top: 25px;
-      bottom: 89.65%;
-
-      font-family: Overpass Mono;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 18px;
-      line-height: 28px;
-      letter-spacing: -0.125em;
-      color: #08bff1;
-      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    }
-
     @media all and (max-width: 479px) {
-      #welcome {
-        display: none;
-      }
-
-      #welcome_text {
-        display: none;
-      }
-
-      #nbpixels {
-        display: none;
-      }
-
       #nb_text {
         display: none;
       }
-    }
-
-    #welcome {
-      z-index: 1;
-      position: absolute;
-      left: 10px;
-      right: 76.18%;
-      top: 10px;
-      bottom: 85.74%;
-      filter: drop-shadow(0 0 0.4rem #000000);
-    }
-
-    #infobackground {
-      z-index: 1;
-      position: absolute;
-      width: 40%;
-      height: 385px;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    #infotext1 {
-      position: absolute;
-      font-family: "Arial", Gadget, sans-serif;
-      font-size: 19px;
-      letter-spacing: 1px;
-      word-spacing: 2px;
-      color: #FFFFFF;
-      text-align: center;
-      top: 5%;
-      font-weight: 600;
-      background: #1969ff;
-      padding: 50px 50px 50px 50px;
-      border-radius: 50px;
     }
 
     #network {
@@ -176,18 +101,10 @@
       font-weight: 700;
     }
 
-    #metalogo {
-      z-index: 2;
-      position: absolute;
-      margin: 5%;
-      width: 15%;
-      height: auto;
-    }
-
     #netrect {
       z-index: 3;
       position: absolute;
-      background-color: #08bff1;
+      background-color: #3c5e8b;
       width: 50%;
       height: 35%;
       top: 50%;
@@ -204,39 +121,6 @@
       height: 100%;
       top: 0;
       left: 0;
-    }
-
-    #table {
-      z-index: 1;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(1.2);
-      filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.8));
-    }
-
-    #gridON {
-      z-index: 1;
-      position: absolute;
-      display: inline;
-      bottom: 30px;
-      left: 55px;
-      height: 70px;
-      width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
-      cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
-
-      transition: transform .2s;
-    }
-
-    #gridON:hover {
-      transform: scale(1.1);
-    }
-
-    #gridON:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
     }
 
     #colorpick:first-child {
@@ -263,7 +147,7 @@
       margin: 0;
       border: none;
       box-shadow: none;
-      border-radius: 30px;
+      border-radius: 50px;
       background: #f0bc12;
       outline: none;
     }
@@ -309,8 +193,8 @@
       right: 50%;
       height: 70px;
       width: 300px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%);
+      border-radius: 50px;
+      background: #3c5e8b;
       box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
       transform: translate(50%, 0);
     }
@@ -339,7 +223,7 @@
       right: 50%;
       height: 30px;
       width: 200px;
-      border-radius: 30px;
+      border-radius: 50px;
       background: linear-gradient(225deg, #fcdb03 0%, #e7c907 100%);
       box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
       transform: translate(50%, 0);
@@ -358,12 +242,12 @@
       z-index: 1;
       position: absolute;
       display: inline;
-      bottom: 30px;
-      right: 30px;
+      top: 55px;
+      left: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
       box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
 
@@ -375,15 +259,7 @@
     }
 
     #twitter:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
-    }
-
-    #telegram:hover {
-      transform: scale(1.1);
-    }
-
-    #telegram:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      background: #3c5e8b;;
     }
 
     #discordlogo {
@@ -399,12 +275,12 @@
       z-index: 1;
       position: absolute;
       display: inline;
-      bottom: 130px;
-      right: 30px;
+      top: 155px;
+      left: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
       box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
 
@@ -416,7 +292,7 @@
     }
 
     #discord:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      background: #3c5e8b;;
     }
 
     #plussymbol {
@@ -436,8 +312,8 @@
       right: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
       box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
 
@@ -449,7 +325,7 @@
     }
 
     #plus:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      background: #3c5e8b;;
     }
 
     #minussymbol {
@@ -469,8 +345,8 @@
       right: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
       box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
 
@@ -495,12 +371,16 @@
       right: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
       box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
+    }
+
+    #refresh:hover {
+      transform: scale(1.1);
     }
 
     #minus:hover {
@@ -508,7 +388,7 @@
     }
 
     #minus:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      background: #3c5e8b;;
     }
 
     #coo {
@@ -550,6 +430,7 @@
       left: 205px;
       width: 100px;
       background-color: #000000;
+      outline:none;
       color: white;
       text-align: center;
       font-family: 'Balsamiq Sans', cursive;
@@ -557,14 +438,11 @@
       font-weight: normal;
       font-size: 14px;
       line-height: 18px;
-      border-radius: 10px;
       cursor: pointer;
     }
 
     .button:hover {
-
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
-
+      background: #1d324e;
     }
 
     #price {
@@ -620,15 +498,14 @@
       box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
       width: 325px;
       height: 150px;
-      background-color: #08bff1;
-      border-radius: 30px;
+      background-color: #3c5e8b;
     }
 
     body {
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background-color: #2E2E2E;
+      background-color: black;
     }
 
   </style>
@@ -636,9 +513,6 @@
 
 
 <body>
-<div>
-  <p id="nb_text">Pixels placed:</p>
-</div>
 
 <div id="infopanel">
   <div id="inforect"></div>
@@ -655,7 +529,6 @@
 
 <div id="buttons">
   <div id="gridON" value="OFF">
-    <img id="table" src="table.svg"/>
   </div>
   <div id="twitter" onclick="window.open('https://twitter.com/harmural','mywindow');">
     <img id="twitterlogo" src="twitter.svg"/>
@@ -665,8 +538,8 @@
   </div>
   <div id="drawbar">
     <input id="colorpick" type="Color"/>
-    <img id="paintlogo" src="pencil.svg"/>
-    <img id="eraserlogo" src="eraser.svg"/>
+    <img id="paintlogo" src="pencil.svg" />
+    <img id="eraserlogo" src="eraser.svg" />
     <div id="colorprice">
       <p id="colorwithprice"></p>
     </div>
@@ -691,6 +564,9 @@
 <div id="logo">
   <img src="./banner.png" alt="banner"
        style="width:250px; position:absolute; top: 50px; left: 50%; margin-left: -125px;">
+  <div>
+    <p id="nb_text">Pixels placed:</p>
+  </div>
 </div>
 
 <img id="canvasImage" src="" style="display: none">
@@ -1172,20 +1048,28 @@
   );*/
 
   web3.eth.getBlockNumber(function (error, blocknumber) {
+    let lastBlock = blocknumber;
+
     contract.events.PixelChanged(
       {
-        fromBlock: blocknumber
+        fromBlock: blocknumber,
       },
       function (error, event) {
         //writePixelWithEvent(event);
-        console.log("new: " + event)
-        web3.eth.call({to: address, data: "0x3bdcd32f"}).then(function (amount) {
-          let nb = web3.utils.hexToNumber(amount);
-          document.getElementById('nb_text').textContent = "Pixels placed: " + nb;
-        });
+        console.log("new: " + event);
+        if (event && event.blockNumber > lastBlock) {
+          lastBlock = event.blockNumber;
+          web3.eth
+            .call({to: address, data: "0x3bdcd32f"})
+            .then(function (amount) {
+              let nb = web3.utils.hexToNumber(amount);
+              document.getElementById("nb_text").textContent =
+                "Pixels placed: " + nb;
+            });
+        }
       }
     );
-  })
+  });
 
 
   let imageLine = new Image();
