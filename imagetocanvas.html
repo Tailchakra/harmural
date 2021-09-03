@@ -278,11 +278,11 @@
   3. Click on the play button and wait few seconds for the Metamask pop up<br><br>
 
   Be careful to upload a small image because the size of it will directly influence the number of pixel on the canvas. A
-  900 pixel (30x30) image will correspond to an image of 900 pixels on the canvas.
+  150 pixel (15x10) image will correspond to an image of 150 pixels on the canvas.
 
   N.B : If you use a png image, transparent pixel will not be integrated to the canvas.<br>
 
-  Because of contract loops, you cannot upload images bigger than 900 pixels. If you want to upload bigger images, please
+  Because of contract loops, you cannot upload images bigger than 150 pixels. If you want to upload bigger images, please
   split your image into multiple smaller images.
 
 </p>
@@ -361,19 +361,19 @@
             color.push(code);
           }
 
-          if (x.length > 900) {
+          if (x.length > 150) {
             document.getElementById("bigerror").style.display = "block";
             break
           }
         }
 
-        if (x.length > 900) {
+        if (x.length > 150) {
           document.getElementById("bigerror").style.display = "block";
           break
         }
       }
 
-      if (x.length <= 900) {
+      if (x.length <= 150) {
         console.log(x, y, color)
         document.getElementById("tocanvas").style.display = "block";
       }
@@ -488,7 +488,7 @@
   async function arrayPixel() {
     document.getElementById("bigerror").style.display = "none";
 
-    if (x.length > 900) {
+    if (x.length > 150) {
       document.getElementById("bigerror").style.display = "block";
       return
     }
