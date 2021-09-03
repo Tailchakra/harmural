@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+  <div id="container"></div>
+
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.3.6/dist/web3.min.js"></script>
+  <script src="https://unpkg.com/konva@7.2.5/konva.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+
+  <meta charset="utf-8"/>
+  <meta name="description"
+        content="A game on the Harmony blockchain based on a canvas of 1000x1000 pixels. Pixel prices increases every time the pixel color is changed."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>HarMural, the canvas game on Harmony</title>
+  <style>
+    #fromimage {
+      z-index: 5;
+      position: absolute;
+
+      top: 70px;
+      left: 25px;
+      color: #ffffff;
+      width: 300px;
+      font-family: 'Balsamiq Sans', cursive;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 18px;
+
+    }
+
+    #nb_text {
+      z-index: 1;
+      position: absolute;
+      left: 55px;
+      right: 400px;
+      bottom: 89.65%;
+
+      font-family: Overpass Mono;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 28px;
+      letter-spacing: -0.125em;
+      color: #fcdb03;
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+
+    #nbpixels {
+      z-index: 1;
+      position: absolute;
+      left: 10px;
+      right: 76.18%;
+      top: 145px;
+      bottom: 85.74%;
+      filter: drop-shadow(0 0 0.4rem #000000);
+    }
+
+    #welcome_text {
+      z-index: 1;
+      position: absolute;
+      left: 55px;
+      right: 300px;
+      top: 25px;
+      bottom: 89.65%;
+
+      font-family: Overpass Mono;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 28px;
+      letter-spacing: -0.125em;
+      color: #08bff1;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    @media all and (max-width: 479px) {
+      #welcome {
+        display: none;
+      }
+
+      #welcome_text {
+        display: none;
+      }
+
+      #nbpixels {
+        display: none;
+      }
+
+      #nb_text {
+        display: none;
+      }
+    }
+
+    #welcome {
+      z-index: 1;
+      position: absolute;
+      left: 10px;
+      right: 76.18%;
+      top: 10px;
+      bottom: 85.74%;
+      filter: drop-shadow(0 0 0.4rem #000000);
+    }
+
+    #infobackground {
+      z-index: 1;
+      position: absolute;
+      width: 40%;
+      height: 385px;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #infotext1 {
+      position: absolute;
+      font-family: "Arial", Gadget, sans-serif;
+      font-size: 19px;
+      letter-spacing: 1px;
+      word-spacing: 2px;
+      color: #FFFFFF;
+      text-align: center;
+      top: 5%;
+      font-weight: 600;
+      background: #1969ff;
+      padding: 50px 50px 50px 50px;
+      border-radius: 50px;
+    }
+
+    #network {
+      display: none;
+    }
+
+    #link {
+      position: absolute;
+      font-family: "Arial", Gadget, sans-serif;
+      font-size: 19px;
+      letter-spacing: 1px;
+      word-spacing: 2px;
+      color: #FFFFFF;
+      text-align: center;
+      width: 80%;
+      margin-left: 10%;
+      top: 75%;
+      font-weight: 600;
+    }
+
+    #instructions {
+      position: absolute;
+      font-family: "Arial", Gadget, sans-serif;
+      font-size: 19px;
+      letter-spacing: 1px;
+      word-spacing: 2px;
+      color: #FFFFFF;
+      text-align: center;
+      width: 80%;
+      margin-left: 10%;
+      top: 40%;
+      font-weight: 600;
+    }
+
+    #changenetwork {
+      position: absolute;
+      font-family: "Arial Black", Gadget, sans-serif;
+      font-size: 25px;
+      letter-spacing: 1px;
+      word-spacing: 2px;
+      color: #FFFFFF;
+      width: 100%;
+      text-align: center;
+      top: 15%;
+      font-weight: 700;
+    }
+
+    #metalogo {
+      z-index: 2;
+      position: absolute;
+      margin: 5%;
+      width: 15%;
+      height: auto;
+    }
+
+    #netrect {
+      z-index: 3;
+      position: absolute;
+      background-color: #08bff1;
+      width: 50%;
+      height: 35%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 25px;
+    }
+
+    #netbackground {
+      z-index: 2;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    #table {
+      z-index: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.2);
+      filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.8));
+    }
+
+    #gridON {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      bottom: 30px;
+      left: 55px;
+      height: 70px;
+      width: 70px;
+      border-radius: 30px;
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      cursor: pointer;
+      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+
+      transition: transform .2s;
+    }
+
+    #gridON:hover {
+      transform: scale(1.1);
+    }
+
+    #gridON:active {
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+    }
+
+    #colorpick:first-child {
+      padding: 0;
+      margin: 0;
+      border: none;
+      box-shadow: none;
+      border-radius: 100px;
+      background: none;
+      margin-bottom: 20px;
+    }
+
+    #colorpick::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    #colorpick::-webkit-color-swatch {
+      border: none;
+      border-radius: 15px;
+    }
+
+    #colorpick:nth-child(2) {
+      padding: 0;
+      margin: 0;
+      border: none;
+      box-shadow: none;
+      border-radius: 30px;
+      background: #f0bc12;
+      outline: none;
+    }
+
+    #colorpick {
+      z-index: 1;
+      position: absolute;
+      transform: translate(0, -50%);
+      border-radius: 4px;
+      border: none;
+      height: 50px;
+      width: 50px;
+      top: 50%;
+      left: 15%;
+      cursor: pointer;
+    }
+
+    #paintlogo {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      bottom: 50%;
+      right: 50%;
+      transform: translate(50%, 50%);
+      cursor: pointer;
+    }
+
+    #eraserlogo {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      bottom: 50%;
+      right: 25%;
+      transform: translate(50%, 50%);
+      cursor: pointer;
+    }
+
+    #drawbar {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      bottom: 30px;
+      right: 50%;
+      height: 70px;
+      width: 300px;
+      border-radius: 30px;
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%);
+      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      transform: translate(50%, 0);
+    }
+
+    #colorwithprice {
+      z-index: 1;
+      position: absolute;
+      transform: translate(50%, 50%);
+      bottom: 0%;
+      left: -20%;
+      color: #FFFFFF;
+      width: 150px;
+      font-family: 'Balsamiq Sans', cursive;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 18px;
+      cursor: pointer;
+    }
+
+    #colorprice {
+      z-index: 1;
+      position: absolute;
+      display: none;
+      bottom: 65px;
+      right: 50%;
+      height: 30px;
+      width: 200px;
+      border-radius: 30px;
+      background: linear-gradient(225deg, #fcdb03 0%, #e7c907 100%);
+      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      transform: translate(50%, 0);
+    }
+
+    #twitterlogo {
+      z-index: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.2);
+      filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.8));
+    }
+
+    #twitter {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      bottom: 30px;
+      right: 30px;
+      height: 70px;
+      width: 70px;
+      border-radius: 30px;
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      cursor: pointer;
+      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+
+      transition: transform .2s;
+    }
+
+    #twitter:hover {
+      transform: scale(1.1);
+    }
+
+    #twitter:active {
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+    }
+
+    #telegram:hover {
+      transform: scale(1.1);
+    }
+
+    #telegram:active {
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+    }
+
+    #discordlogo {
+      z-index: 1;
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 1));
+    }
+
+    #discord {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      bottom: 130px;
+      right: 30px;
+      height: 70px;
+      width: 70px;
+      border-radius: 30px;
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      cursor: pointer;
+      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+
+      transition: transform .2s;
+    }
+
+    #discord:hover {
+      transform: scale(1.1);
+    }
+
+    #discord:active {
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+    }
+
+    #plussymbol {
+      z-index: 1;
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 1));
+    }
+
+    #plus {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      top: 55px;
+      right: 30px;
+      height: 70px;
+      width: 70px;
+      border-radius: 30px;
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      cursor: pointer;
+      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+
+      transition: transform .2s;
+    }
+
+    #plus:hover {
+      transform: scale(1.1);
+    }
+
+    #plus:active {
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+    }
+
+    #minussymbol {
+      z-index: 1;
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.07);
+      filter: drop-shadow(0 0 5rem rgba(255, 255, 255, 1));
+    }
+
+    #minus {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      top: 155px;
+      right: 30px;
+      height: 70px;
+      width: 70px;
+      border-radius: 30px;
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      cursor: pointer;
+      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+
+      transition: transform .2s;
+    }
+
+    #refreshsymbol {
+      z-index: 1;
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      color: white;
+      transform: translate(-50%, -50%) scale(1);
+      filter: drop-shadow(0 0 5rem rgba(255, 255, 255, 1));
+    }
+
+    #refresh {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      top: 255px;
+      right: 30px;
+      height: 70px;
+      width: 70px;
+      border-radius: 30px;
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      cursor: pointer;
+      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+
+      transition: transform .2s;
+    }
+
+    #minus:hover {
+      transform: scale(1.1);
+    }
+
+    #minus:active {
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+    }
+
+    #coo {
+      z-index: 1;
+      position: absolute;
+
+      top: 96px;
+      left: 25px;
+      color: #ffffff;
+      width: 300px;
+      font-family: 'Balsamiq Sans', cursive;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 18px;
+
+    }
+
+    #pcolor {
+      z-index: 1;
+      position: absolute;
+
+      top: 96px;
+      left: 220px;
+      color: #ffffff;
+      width: 300px;
+      font-family: 'Balsamiq Sans', cursive;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 18px;
+
+    }
+
+    .button {
+      z-index: 1;
+      position: absolute;
+      top: 52px;
+      left: 205px;
+      width: 100px;
+      background-color: #000000;
+      color: white;
+      text-align: center;
+      font-family: 'Balsamiq Sans', cursive;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+
+      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+
+    }
+
+    #price {
+      z-index: 1;
+      position: absolute;
+
+      top: 17px;
+      left: 35px;
+      color: #FFFFFF;
+      width: 120px;
+      font-family: 'Balsamiq Sans', cursive;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 18px;
+
+    }
+
+    #colorpicker {
+      z-index: 1;
+      position: absolute;
+
+      top: 20px;
+      left: 230px;
+      border: none;
+
+    }
+
+    #infopanel {
+      z-index: 1;
+      position: absolute;
+
+      display: none;
+      top: 400px;
+      left: 450px;
+
+    }
+
+    #infobutton {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      top: 20px;
+      left: 20px;
+    }
+
+    #inforect {
+      z-index: 1;
+      position: absolute;
+      display: inline;
+      top: 0px;
+      left: 0px;
+      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      width: 325px;
+      height: 150px;
+      background-color: #08bff1;
+      border-radius: 30px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #2E2E2E;
+    }
+
+  </style>
+</head>
+
+
+<body>
+<div>
+  <p id="nb_text">Pixels placed:</p>
+</div>
+
+<div id="infopanel">
+  <div id="inforect"></div>
+  <img id="infobutton" src="./infobutton.png">
+  <input id="colorpicker" type="Color"/>
+  <p id="price">Color this pixel for</p>
+  <p id="X">X:</p>
+  <p id="Y">Y:</p>
+  <p id="coo"></p>
+  <p id="pcolor"></p>
+  <p id="fromimage"><a href="./imagetocanvas.html" style="color: white">Upload an image</a></p>
+  <button id="colorbutton" class="button">COLOR</button>
+</div>
+
+<div id="buttons">
+  <div id="gridON" value="OFF">
+    <img id="table" src="table.svg"/>
+  </div>
+  <div id="twitter" onclick="window.open('https://twitter.com/harmural','mywindow');">
+    <img id="twitterlogo" src="twitter.svg"/>
+  </div>
+  <div id="discord" onclick="window.open('https://discord.gg/y7ywa37CFG','mywindow');">
+    <img id="discordlogo" src="discord.svg"/>
+  </div>
+  <div id="drawbar">
+    <input id="colorpick" type="Color"/>
+    <img id="paintlogo" src="pencil.svg"/>
+    <img id="eraserlogo" src="eraser.svg"/>
+    <div id="colorprice">
+      <p id="colorwithprice"></p>
+    </div>
+  </div>
+
+</div>
+
+<div id="network">
+  <div id="netbackground"></div>
+  <div id="netrect">
+    <!--<img id="metalogo" src="./metamask_logo.png">-->
+    <b id="changenetwork">CHANGE THE NETWORK</b>
+    <p id="instructions">Select the Harmony Network on Metamask. Please read the instructions below to connect to
+      it.</p>
+    <a id="link"
+       href="https://docs.harmony.one/home/network/wallets/browser-extensions-wallets/metamask-wallet#setting-up-metamask"
+       target="_blank">Setup Metamask on ONE
+      network</a>
+  </div>
+</div>
+
+<div id="logo">
+  <img src="./banner.png" alt="banner"
+       style="width:250px; position:absolute; top: 50px; left: 50%; margin-left: -125px;">
+</div>
+
+<img id="canvasImage" src="" style="display: none">
+
+<div id="canvasContainer" class="canvasContainer" style="display: none">
+  <canvas id="canvas" width="1000" height="1000"></canvas>
+</div>
+
+<div id="zoombuttons">
+  <div id="plus" onclick="CanvasZoom(1.8)">
+    <img id="plussymbol" src="plus.svg"/>
+  </div>
+  <div id="minus" onclick="CanvasZoom(1/1.8)">
+    <img id="minussymbol" src="minus.svg"/>
+  </div>
+  <div id="refresh" onclick="getCanvas()">
+    <svg id="refreshsymbol" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sync" role="img"
+         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-sync fa-w-16 fa-3x">
+      <path fill="currentColor"
+            d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z"
+            class=""></path>
+    </svg>
+  </div>
+</div>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import {initializeApp} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
+  import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_yGXrcyWuAMIgDCADUV3Q3OzfbbkCp70",
+    authDomain: "harmural.firebaseapp.com",
+    projectId: "harmural",
+    storageBucket: "harmural.appspot.com",
+    messagingSenderId: "297251315485",
+    appId: "1:297251315485:web:634c127c8011fe6ef38bf4",
+    measurementId: "G-L7CQCN77KP"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+<script>
+
+
+  let pastblocks = 0;
+  let blocknb = 0;
+
+  function generateImage(cnvs) {
+    let image = cnvs.toDataURL("image/png")
+    return image;
+  }
+
+
+  let contract;
+  let imga = document.createElement("img");
+  imga.setAttribute("id", "can")
+
+
+  if (typeof web3 !== 'undefined') {
+    window.web3.currentProvider.enable();
+    web3 = new Web3(window.web3.currentProvider);
+    console.log(web3)
+  } else {
+    console.log('No connection');
+    web3 = new Web3(new Web3.providers.WebsocketProvider('wss://ws.s0.pops.one/'));
+  }
+
+
+  let currnet = web3.eth.net.getId();
+
+  currnet.then(function (result) {
+    console.log(result);
+    if (result !== 1666700000) {
+      console.log(result);
+      document.getElementById("network").style.display = "inline";
+    }
+
+    window.ethereum.on('chainChanged', (chainId) => {
+      window.location.reload();
+    });
+
+  });
+
+
+  const abi = [{
+    "anonymous": false,
+    "inputs": [{"indexed": false, "internalType": "uint256", "name": "x", "type": "uint256"}, {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "y",
+      "type": "uint256"
+    }, {"indexed": false, "internalType": "address", "name": "owner", "type": "address"}, {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "soldPrice",
+      "type": "uint256"
+    }, {"indexed": false, "internalType": "bytes3", "name": "color", "type": "bytes3"}],
+    "name": "PixelChanged",
+    "type": "event"
+  }, {
+    "inputs": [],
+    "name": "NumberPixelChanged",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  }, {
+    "inputs": [],
+    "name": "basePrice",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  }, {
+    "inputs": [{"internalType": "uint256[]", "name": "x", "type": "uint256[]"}, {
+      "internalType": "uint256[]",
+      "name": "y",
+      "type": "uint256[]"
+    }, {"internalType": "bytes3[]", "name": "color", "type": "bytes3[]"}],
+    "name": "colorMultiplePixel",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  }, {
+    "inputs": [{"internalType": "uint256", "name": "x", "type": "uint256"}, {
+      "internalType": "uint256",
+      "name": "y",
+      "type": "uint256"
+    }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
+    "name": "colorPixel",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  }, {
+    "inputs": [],
+    "name": "getBalance",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  }, {
+    "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}, {
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+    }],
+    "name": "pixels",
+    "outputs": [{"internalType": "address", "name": "owner", "type": "address"}, {
+      "internalType": "uint256",
+      "name": "soldPrice",
+      "type": "uint256"
+    }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
+    "stateMutability": "view",
+    "type": "function"
+  }, {
+    "inputs": [{"internalType": "uint256", "name": "amount", "type": "uint256"}],
+    "name": "withdraw",
+    "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }];
+
+  const address = '0x7a1f208DD13E43cD974ABAFB0B8a1BACfa009f81';
+
+  contract = new web3.eth.Contract(abi, address);
+
+
+  web3.eth.call({to: address, data: "0x3bdcd32f"}).then(function (amount) {
+    let nb = web3.utils.hexToNumber(amount);
+    document.getElementById('nb_text').textContent = "Pixels placed: " + nb;
+  });
+
+
+  /*window.onload = function() {
+    const api_url = "https://oneplace-canvas.herokuapp.com/";
+    async function getDataURL() {
+      const response = await fetch(api_url);
+      const data = await response.text();
+      console.log(data);
+    }
+    getDataURL();
+  };*/
+
+
+
+
+  /*function writePixelWithEvent(event) {
+        let { x, y, color } = event.returnValues;
+        writePixel(
+          parseInt(x),
+          parseInt(y),
+          parseColor(color)
+        );
+      }
+
+
+  function parseColor(rawColor) {
+    let rgb = [];
+    for (let i = 0; i < rawColor.length; i += 2) {
+      let chunk = rawColor.substring(i, i + 2);
+      if (chunk !== '0x') {
+        rgb.push(parseInt(chunk, 16).toString(10));
+      }
+    }
+    return rgb;
+  }*/
+
+  let canvas = document.getElementById('canvas');
+  let ctx = canvas.getContext('2d');
+  let img = document.getElementById("canvasImage");
+
+
+  /*function writePixel(x, y, color) {
+
+    let imageData = ctx.getImageData(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+    );
+    let data = imageData.data;
+
+    // grab the existing image data
+
+    // notice that canvas is in scope here
+    let columns = canvas.width;
+    let rows = canvas.height;
+
+    // Now, finding the index is a little tricky, because the image data is a
+    // one-dimensional array.
+    //
+    // How do we find the index in a one-dimensional array? First we'll take the
+    // y-value times the number of columns plus the x value, times 4. Why four?
+    // Because we have one byte per channel per pixel.
+    //
+    // If that seems confusing, try to work it out on paper, but honestly
+    // understanding the layout of this image array it's not that crucial to building
+    // this app. This _is_ how you find the index.
+
+    let i = (y * columns + x) * 4;
+
+    // Now we will assign the pixel in data each channel of our pixel in color.
+    data[i] = color[0];
+    data[i + 1] = color[1];
+    data[i + 2] = color[2];
+
+
+    // I want every pixel to be opaque, that is, no transparency, so I'll set the
+    // alpha channel to 255. If you don't do this, your pixels will be invisible.
+    data[i + 3] = 255; // alpha
+
+    // And lastly, we put the image data back into the canvas.
+    // You might see this and realize that we're rewriting the canvas on every pixel.
+    // You could certainly batch these updates, but we're not going to, just for
+    // simplicity.
+    ctx.putImageData(imageData, 0, 0);
+
+    /*ctx.fillStyle = "rgba("+color[0]+","+color[1]+","+color[2]+","+255+")";
+    ctx.fillRect( x, y, 1, 1 );
+
+
+    canvas.toBlob((blob) => {
+      img.src = URL.createObjectURL(blob);
+      imageObj.src = img.src;
+    })*/
+
+  /*canvas.toBlob((blob) => {
+    img.src = URL.createObjectURL(blob);
+    imageObj.src = img.src;
+    blocknb++
+    if (blocknb == pastblocks) {
+      console.log("done")
+    }
+    //console.log(URL.createObjectURL(blob))
+  })
+
+
+
+  layer.batchDraw();
+
+
+  }*/
+
+
+
+
+
+
+
+  /*contract.getPastEvents(
+    'PixelChanged',
+    {
+      fromBlock: pastblocks
+    },
+    function(error, events) {
+      console.log('events : ', events);
+
+      pastblocks = events.length;
+      console.log(pastblocks)
+      events.map(e => writePixelWithEvent(e));
+    }
+  );*/
+
+  web3.eth.getBlockNumber(function (error, blocknumber) {
+    contract.events.PixelChanged(
+      {
+        fromBlock: blocknumber
+      },
+      function (error, event) {
+        //writePixelWithEvent(event);
+        console.log("new: " + event)
+        web3.eth.call({to: address, data: "0x3bdcd32f"}).then(function (amount) {
+          let nb = web3.utils.hexToNumber(amount);
+          document.getElementById('nb_text').textContent = "Pixels placed: " + nb;
+        });
+      }
+    );
+  })
+
+
+  let imageLine = new Image();
+  imageLine.onload = function () {
+    let lines = new Konva.Image({
+      x: width / 2 - height / 2.7,
+      y: height / 4.5,
+      image: imageLine,
+      width: height / 1.35,
+      height: height / 1.35,
+    });
+    grouplines.add(lines);
+    layer.batchDraw();
+  }
+
+
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  let stage = new Konva.Stage({
+    container: document.getElementById('container'),
+    width: width,
+    height: height,
+    draggable: true,
+  });
+
+  let posX;
+  let posY;
+
+  let layer = new Konva.Layer();
+  stage.add(layer);
+
+  let group = new Konva.Group();
+  layer.add(group);
+
+  let white = new Konva.Rect({
+    x: width / 2 - height / 2.7,
+    y: height / 4.5,
+    image: imageLine,
+    width: height / 1.35,
+    height: height / 1.35,
+    fill: 'white',
+  });
+
+  group.add(white);
+  layer.batchDraw();
+
+  let imageObj = new Image();
+  imageObj.onload = function () {
+    let yoda = new Konva.Image({
+      x: width / 2 - height / 2.7,
+      y: height / 4.5,
+      image: imageObj,
+      width: height / 1.35,
+      height: height / 1.35,
+      stroke: 'white',
+      strokeWidth: 2,
+      strokeScaleEnabled: false,
+    });
+
+    layer.imageSmoothingEnabled(false);
+
+// add the shape to the layer
+    group.add(yoda);
+    layer.batchDraw();
+  };
+
+  //let imageCanvas = document.getElementById('canvas');
+  //let img = document.getElementById("canvasImage");
+
+  let dataU;
+
+
+  fetch('http://localhost:3000/dataURL.txt')
+    .then(function (response) {
+      if (draw !== "draw" || draw !== "eraser") {
+        console.log(response.body);
+        response.text().then(function (text) {
+          if (text.indexOf("=") > 0) {
+            if (text.charAt(text.indexOf("=") + 1) == "=") {
+              dataU = text.substring(0, text.indexOf("=") + 2);
+              console.log(dataU)
+              imageObj.src = dataU;
+              img.src = dataU;
+            } else {
+              dataU = text.substring(0, text.indexOf("=") + 1);
+              console.log(dataU)
+              imageObj.src = dataU;
+              img.src = dataU;
+            }
+          } else {
+            dataU = text;
+            imageObj.src = dataU;
+            img.src = dataU;
+          }
+        });
+      }
+    });
+
+
+  //imageObj.src = Canvas2Image.convertToPNG(imageCanvas);
+
+  let grouplines = new Konva.Group();
+  layer.add(grouplines);
+
+
+  /*for (i = 0; i < 1001; i++) {
+    let lineX1 = width/4 + height/4 + i * height/2 / 1000;
+    let lineY1 = height/4;
+    let lineX2 = width/4 + height/4 + i * height/2 / 1000;
+    let lineY2 = 3 * height/4;
+    let linever = new Konva.Line({
+        points: [lineX1, lineY1, lineX2, lineY2],
+        stroke: '#adadad',
+        strokeWidth: 0.03
+    });
+    grouplines.add(linever);
+    let linehor = new Konva.Line({
+        points: [lineY2 + height/2 +11.5, lineX2 - height/2 - 11.5, lineY1 + height/2 + 11.5, lineX1 - height/2 -11.5],
+        stroke: '#adadad',
+        strokeWidth: 0.03
+    });
+    grouplines.add(linehor);
+  }*/
+
+
+  imageLine.src = './grid.png';
+  document.getElementById("gridON").value = "Off";
+  grouplines.hide();
+
+  function getCanvas() {
+    window.location.reload(1);
+
+    arrayx = [];
+    arrayy = [];
+    arrayxy = [];
+    arraycolor = [];
+    pixelsprice = 0;
+    document.getElementById("colorwithprice").innerHTML = "Color for: " + pixelsprice / 1000000000000000000 + "ONE";
+    document.getElementById("colorprice").style.display = 'none';
+
+    if (draw !== "draw" || draw !== "eraser") {
+      fetch('http://localhost:3000/dataURL.txt').then(function (response) {
+        console.log(response.body);
+        response.text().then(function (text) {
+          imageObj.src = text;
+          img.src = text;
+          console.log(text)
+        });
+      })
+    }
+  }
+
+  function CanvasZoom(direction) {
+    let oldScale = stage.scaleX();
+
+    let pointer = {
+      x: width / 2,
+      y: height / 2
+    };
+
+    //let pointer = stage.getPointerPosition();
+    console.log(pointer)
+
+    let mousePointTo = {
+      x: (pointer.x - stage.x()) / oldScale,
+      y: (pointer.y - stage.y()) / oldScale,
+    };
+
+    console.log(mousePointTo.x, mousePointTo.y)
+
+
+    let newScale = oldScale * direction;
+
+    stage.scale({x: newScale, y: newScale});
+
+    let newPos = {
+      x: pointer.x - mousePointTo.x * newScale,
+      y: pointer.y - mousePointTo.y * newScale,
+    };
+
+    stage.position(newPos);
+
+    stage.batchDraw();
+  }
+
+
+  let scaleBy = 0.8;
+  stage.on('wheel', (e) => {
+    e.evt.preventDefault();
+    let rect = document.getElementById('infopanel');
+    rect.style.display = 'none';
+    let oldScale = stage.scaleX();
+
+    let pointer = stage.getPointerPosition();
+
+    let mousePointTo = {
+      x: (pointer.x - stage.x()) / oldScale,
+      y: (pointer.y - stage.y()) / oldScale,
+    };
+
+    console.log(pointer.x, pointer.y)
+
+
+    let newScale =
+      e.evt.deltaY > 0 ? oldScale * scaleBy : oldScale / scaleBy;
+
+    stage.scale({x: newScale, y: newScale});
+
+    let newPos = {
+      x: pointer.x - mousePointTo.x * newScale,
+      y: pointer.y - mousePointTo.y * newScale,
+    };
+
+    if (oldScale > 30) {
+      document.getElementById("gridON").value = "On"
+      grouplines.show();
+    } else {
+      document.getElementById("gridON").value = "Off"
+      grouplines.hide();
+    }
+    stage.position(newPos);
+    stage.batchDraw();
+
+
+  });
+
+  function getDistance(p1, p2) {
+    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+  }
+
+  function getCenter(p1, p2) {
+    return {
+      x: (p1.x + p2.x) / 2,
+      y: (p1.y + p2.y) / 2,
+    };
+  }
+
+
+  function getRelativePointerPosition(node) {
+    let transform = node.getAbsoluteTransform().copy();
+    // to detect relative position we need to invert transform
+    transform.invert();
+
+    // get pointer (say mouse or touch) position
+    let pos = node.getStage().getPointerPosition();
+
+    // now we can find relative point
+    return transform.point(pos);
+  }
+
+  let draw = "none";
+
+  let arrayx = [];
+  let arrayy = [];
+  let arrayxy = [];
+  let arraycolor = [];
+  let pixelsprice = 0;
+
+  stage.on('click', async function () {
+    if (draw == "none") {
+      let pos = getRelativePointerPosition(group);
+
+      let posX = parseInt((4000 / height / 2.96298) * (pos.x - (width / 2 - height / 2.7)));
+      let posY = parseInt((4000 / height / 2.96298) * (pos.y - height / 4.5));
+
+      //let posX = parseInt(4000 / height/2 * (pos.x - (width/2 - height/2.7)));
+      //let posY = parseInt(4000 / height/2 * (pos.y - height/1.35) - 1000);
+      let coo = {x: posX, y: posY};
+
+      let rect = document.getElementById('infopanel');
+      let button = document.getElementById('infobutton');
+
+      let lastprice = await infoPixel(posX, posY);
+
+
+      let pcolor = (lastprice[2] + "").slice(2);
+      console.log(pcolor)
+
+      let Price
+
+      console.log(lastprice)
+
+      if (lastprice[1] == 0) {
+        Price = 100000000000000000;
+      } else {
+        Price = lastprice[1] * 1.2;
+      }
+
+      Price = Price / 1000000000000000000;
+
+      document.getElementById('X').textContent = posX;
+      document.getElementById('Y').textContent = posY;
+      document.getElementById('coo').textContent = "X: " + posX + "  Y: " + posY;
+      document.getElementById('pcolor').textContent = "#" + pcolor;
+
+
+      document.getElementById('price').textContent = "Color this pixel for " + Price.toFixed(5) + " ONE";
+
+
+      rect.style.display = 'inline'
+      rect.style.left = stage.getPointerPosition().x + 100 + 'px'
+      rect.style.top = stage.getPointerPosition().y - 25 + 'px'
+      //button.style.display = 'inline'
+      //button.style.left = window.event.clientX + 70 + 'px'
+      //button.style.top = window.event.clientY + 65 + 'px'
+
+
+      layer.batchDraw();
+    } else if (draw == "draw") {
+      let pos = getRelativePointerPosition(group);
+      let colorselector = document.getElementById("colorpick").value.substring(1);
+
+      let posX = parseInt((4000 / height / 2.96298) * (pos.x - (width / 2 - height / 2.7)));
+      let posY = parseInt((4000 / height / 2.96298) * (pos.y - height / 4.5));
+      let posXY = parseInt((4000 / height / 2.96298) * (pos.x - (width / 2 - height / 2.7))).toString() + parseInt((4000 / height / 2.96298) * (pos.y - height / 4.5)).toString()
+
+      console.log(posX, posY)
+
+      if (arrayxy.includes(posXY)) {
+
+      } else {
+        let lastprice = await infoPixel(posX, posY);
+
+        if (lastprice[1] == 0) {
+          pixelsprice = pixelsprice + 100000000000000000;
+        } else {
+          pixelsprice = pixelsprice + lastprice[1] * 1.2;
+        }
+
+        arrayx.push(posX);
+        arrayy.push(posY);
+        arrayxy.push(posXY);
+        arraycolor.push("0x" + colorselector);
+        console.log(arrayx, arrayy, arraycolor, pixelsprice)
+
+        writePixel(posX, posY, colorselector);
+        document.getElementById("colorwithprice").innerHTML = "Color for: " + pixelsprice / 1000000000000000000 + "ONE";
+        document.getElementById("colorprice").style.display = 'inline';
+      }
+    } else if (draw == "eraser") {
+
+      let pos = getRelativePointerPosition(group);
+
+      let posX = parseInt((4000 / height / 2.96298) * (pos.x - (width / 2 - height / 2.7)));
+      let posY = parseInt((4000 / height / 2.96298) * (pos.y - height / 4.5));
+
+      for (let i = 0; i < arrayx.length; i++) {
+
+        if (arrayx[i] == posX && arrayy[i] == posY) {
+          arrayy.splice(i, 1);
+          arrayx.splice(i, 1);
+          arraycolor.splice(i, 1);
+          console.log(arrayx, arrayy, arraycolor);
+          let lastprice = await infoPixel(posX, posY);
+          if (lastprice[1] == 0) {
+            let pcolor = "ffffff";
+            console.log(posX, posY, pcolor);
+            writePixel(posX, posY, pcolor);
+            pixelsprice = pixelsprice - 100000000000000000;
+            document.getElementById("colorwithprice").innerHTML = "Color for: " + pixelsprice / 1000000000000000000 + "ONE";
+          } else {
+            let pcolor = "" + (lastprice[2] + "").slice(2);
+            console.log(posX, posY, pcolor);
+            writePixel(posX, posY, pcolor);
+            pixelsprice = pixelsprice - lastprice[1] * 1.2;
+            document.getElementById("colorwithprice").innerHTML = "Color for: " + pixelsprice / 1000000000000000000 + "ONE";
+          }
+
+        }
+      }
+    }
+
+  });
+
+  function colorthosepixels(xarray, yarray, colorarray, thisprice) {
+    web3.eth.getAccounts().then(function (accounts) {
+      let acc = accounts[0];
+      return contract.methods.colorMultiplePixel(xarray, yarray, colorarray).send({from: acc, value: thisprice});
+    }).then(function (tx) {
+      getCanvas()
+      console.log(tx);
+    })
+  }
+
+  function changedraw(method) {
+    draw = method;
+  }
+
+  document.getElementById("paintlogo").addEventListener("click", function () {
+    changedraw("draw");
+  });
+
+  document.getElementById("eraserlogo").addEventListener("click", function () {
+    changedraw("eraser");
+  });
+
+  document.getElementById("colorwithprice").addEventListener("click", function () {
+    colorthosepixels(arrayx, arrayy, arraycolor, pixelsprice);
+  });
+
+
+  function parseColor(rawColor) {
+    let rgb = [];
+    for (let i = 0; i < rawColor.length; i += 2) {
+      let chunk = rawColor.substring(i, i + 2);
+      if (chunk !== '0x') {
+        rgb.push(parseInt(chunk, 16).toString(10));
+      }
+    }
+    return rgb;
+  }
+
+
+  function writePixel(x, y, color) {
+    ctx.drawImage(img, 0, 0);
+    let imageData = ctx.getImageData(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+    let data = imageData.data;
+    color = parseColor(color);
+
+    // grab the existing image data
+
+    // notice that canvas is in scope here
+    let columns = canvas.width;
+    let rows = canvas.height;
+
+    // Now, finding the index is a little tricky, because the image data is a
+    // one-dimensional array.
+    //
+    // How do we find the index in a one-dimensional array? First we'll take the
+    // y-value times the number of columns plus the x value, times 4. Why four?
+    // Because we have one byte per channel per pixel.
+    //
+    // If that seems confusing, try to work it out on paper, but honestly
+    // understanding the layout of this image array it's not that crucial to building
+    // this app. This _is_ how you find the index.
+
+    let i = (y * columns + x) * 4;
+
+    // Now we will assign the pixel in data each channel of our pixel in color.
+    data[i] = color[0];
+    data[i + 1] = color[1];
+    data[i + 2] = color[2];
+
+
+    // I want every pixel to be opaque, that is, no transparency, so I'll set the
+    // alpha channel to 255. If you don't do this, your pixels will be invisible.
+    data[i + 3] = 255; // alpha
+
+    // And lastly, we put the image data back into the canvas.
+    // You might see this and realize that we're rewriting the canvas on every pixel.
+    // You could certainly batch these updates, but we're not going to, just for
+    // simplicity.
+    ctx.putImageData(imageData, 0, 0);
+
+    ctx.fillStyle = "rgba(" + color[0] + "," + color[1] + "," + color[2] + "," + 255 + ")";
+    ctx.fillRect(x, y, 1, 1);
+
+
+    canvas.toBlob((blob) => {
+      img.src = URL.createObjectURL(blob);
+      imageObj.src = img.src;
+    })
+
+    canvas.toBlob((blob) => {
+      img.src = URL.createObjectURL(blob);
+      imageObj.src = img.src;
+      blocknb++
+      if (blocknb == pastblocks) {
+        console.log("done")
+      }
+      //console.log(URL.createObjectURL(blob))
+    })
+
+
+    layer.batchDraw();
+
+
+  }
+
+  document.getElementById("gridON").addEventListener("click", function () {
+    currentvalue = document.getElementById('gridON').value;
+    if (currentvalue == "Off") {
+      document.getElementById("gridON").value = "On";
+      grouplines.show();
+      layer.batchDraw();
+    } else {
+      document.getElementById("gridON").value = "Off";
+      grouplines.hide();
+      layer.batchDraw();
+    }
+  });
+
+
+  document.getElementById("colorbutton").addEventListener("click", function () {
+    let hex = document.getElementById("colorpicker").value.substring(1);
+    let posX = document.getElementById('X').textContent;
+    let posY = document.getElementById('Y').textContent;
+    console.log(hex)
+    colorPixel(posX, posY, hex)
+  });
+
+
+  async function colorPixel(x, y, hex) {
+    let color = '0x' + hex;
+
+
+    let lastprice = await infoPixel(x, y);
+
+    console.log(lastprice[1]);
+    let Price
+
+    if (lastprice[1] == 0) {
+      Price = 100000000000000000;
+    } else {
+      Price = lastprice[1] * 1.2;
+    }
+    console.log(Price);
+
+    web3.eth.getAccounts().then(function (accounts) {
+      let acc = accounts[0];
+      return contract.methods.colorPixel(x, y, color).send({from: acc, value: Price});
+    }).then(function (tx) {
+      let block = tx.blockNumber;
+      getCanvas()
+
+      /*contract.events.PixelChanged(
+        {
+          fromBlock: block
+        },
+        function(error, event) {
+          writePixelWithEvent(event);
+          console.log("qdfsdfsddsf" + event)
+        }
+      );*/
+      //updateCanvas(x, y, color);
+
+      console.log(tx);
+    })
+  }
+
+  async function infoPixel(x, y) {
+    const info = await contract.methods.pixels(x, y).call();
+    lastBasePrice = info[1];
+    return info;
+  }
+
+  async function getPixelOwner(x, y) {
+    const pixelowner = await infoPixel(x, y);
+    console.log(pixelowner[0]);
+  }
+
+  function getBalance() {
+    contract.methods.getBalance().call().then(function (amount) {
+      console.log(amount);
+    });
+  }
+
+  function withdraw(x) {
+    web3.eth.getAccounts().then(function (accounts) {
+      let acc = accounts[0];
+      return contract.methods.withdraw(x).send({from: acc});
+    }).then(function (tx) {
+      console.log(tx);
+    })
+  }
+
+
+</script>
+</body>
+</html>
