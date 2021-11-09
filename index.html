@@ -34,11 +34,11 @@
     }
 
     #nb_text {
-      z-index: 1;
       position: absolute;
-      left: 55px;
-      right: 400px;
-      bottom: 89.65%;
+      top: 160px;
+      text-align: center;
+      width: 100%;
+      z-index: 1;
 
       font-family: Overpass Mono;
       font-style: normal;
@@ -50,85 +50,10 @@
       text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     }
 
-    #nbpixels {
-      z-index: 1;
-      position: absolute;
-      left: 10px;
-      right: 76.18%;
-      top: 145px;
-      bottom: 85.74%;
-      filter: drop-shadow(0 0 0.4rem #000000);
-    }
-
-    #welcome_text {
-      z-index: 1;
-      position: absolute;
-      left: 55px;
-      right: 300px;
-      top: 25px;
-      bottom: 89.65%;
-
-      font-family: Overpass Mono;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 18px;
-      line-height: 28px;
-      letter-spacing: -0.125em;
-      color: #08bff1;
-      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    }
-
     @media all and (max-width: 479px) {
-      #welcome {
-        display: none;
-      }
-
-      #welcome_text {
-        display: none;
-      }
-
-      #nbpixels {
-        display: none;
-      }
-
       #nb_text {
         display: none;
       }
-    }
-
-    #welcome {
-      z-index: 1;
-      position: absolute;
-      left: 10px;
-      right: 76.18%;
-      top: 10px;
-      bottom: 85.74%;
-      filter: drop-shadow(0 0 0.4rem #000000);
-    }
-
-    #infobackground {
-      z-index: 1;
-      position: absolute;
-      width: 40%;
-      height: 385px;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    #infotext1 {
-      position: absolute;
-      font-family: "Arial", Gadget, sans-serif;
-      font-size: 19px;
-      letter-spacing: 1px;
-      word-spacing: 2px;
-      color: #FFFFFF;
-      text-align: center;
-      top: 5%;
-      font-weight: 600;
-      background: #1969ff;
-      padding: 50px 50px 50px 50px;
-      border-radius: 50px;
     }
 
     #network {
@@ -176,18 +101,10 @@
       font-weight: 700;
     }
 
-    #metalogo {
-      z-index: 2;
-      position: absolute;
-      margin: 5%;
-      width: 15%;
-      height: auto;
-    }
-
     #netrect {
       z-index: 3;
       position: absolute;
-      background-color: #08bff1;
+      background-color: #3c5e8b;
       width: 50%;
       height: 35%;
       top: 50%;
@@ -206,45 +123,11 @@
       left: 0;
     }
 
-    #table {
-      z-index: 1;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(1.2);
-      filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.8));
-    }
-
-    #gridON {
-      z-index: 1;
-      position: absolute;
-      display: inline;
-      bottom: 30px;
-      left: 55px;
-      height: 70px;
-      width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
-      cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
-
-      transition: transform .2s;
-    }
-
-    #gridON:hover {
-      transform: scale(1.1);
-    }
-
-    #gridON:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
-    }
-
     #colorpick:first-child {
       padding: 0;
       margin: 0;
       border: none;
       box-shadow: none;
-      border-radius: 100px;
       background: none;
       margin-bottom: 20px;
     }
@@ -255,7 +138,6 @@
 
     #colorpick::-webkit-color-swatch {
       border: none;
-      border-radius: 15px;
     }
 
     #colorpick:nth-child(2) {
@@ -263,56 +145,48 @@
       margin: 0;
       border: none;
       box-shadow: none;
-      border-radius: 30px;
       background: #f0bc12;
       outline: none;
     }
 
     #colorpick {
       z-index: 1;
-      position: absolute;
-      transform: translate(0, -50%);
-      border-radius: 4px;
       border: none;
       height: 50px;
       width: 50px;
-      top: 50%;
-      left: 15%;
       cursor: pointer;
     }
 
     #paintlogo {
+      height: 50px;
+      width: 50px;
+      padding-left: 3rem;
+      padding-right: 3rem;
       z-index: 1;
-      position: absolute;
       display: inline;
-      bottom: 50%;
-      right: 50%;
-      transform: translate(50%, 50%);
       cursor: pointer;
     }
 
     #eraserlogo {
+      height: 50px;
+      width: 50px;
       z-index: 1;
-      position: absolute;
       display: inline;
-      bottom: 50%;
-      right: 25%;
-      transform: translate(50%, 50%);
       cursor: pointer;
     }
 
     #drawbar {
+      text-align: center;
+      padding-top: 15px;
       z-index: 1;
       position: absolute;
       display: inline;
-      bottom: 30px;
-      right: 50%;
+      bottom: 0;
+      left: 0;
       height: 70px;
-      width: 300px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%);
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
-      transform: translate(50%, 0);
+      width: 100%;
+      background: #3c5e8b;
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
     }
 
     #colorwithprice {
@@ -335,13 +209,13 @@
       z-index: 1;
       position: absolute;
       display: none;
-      bottom: 65px;
+      bottom: 90px;
       right: 50%;
       height: 30px;
       width: 200px;
-      border-radius: 30px;
+      border-radius: 50px;
       background: linear-gradient(225deg, #fcdb03 0%, #e7c907 100%);
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
       transform: translate(50%, 0);
     }
 
@@ -358,14 +232,14 @@
       z-index: 1;
       position: absolute;
       display: inline;
-      bottom: 30px;
-      right: 30px;
+      top: 55px;
+      left: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
     }
@@ -375,15 +249,7 @@
     }
 
     #twitter:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
-    }
-
-    #telegram:hover {
-      transform: scale(1.1);
-    }
-
-    #telegram:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      background: #3c5e8b;;
     }
 
     #discordlogo {
@@ -399,14 +265,14 @@
       z-index: 1;
       position: absolute;
       display: inline;
-      bottom: 130px;
-      right: 30px;
+      top: 155px;
+      left: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
     }
@@ -416,7 +282,7 @@
     }
 
     #discord:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      background: #3c5e8b;;
     }
 
     #plussymbol {
@@ -436,10 +302,10 @@
       right: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
     }
@@ -449,7 +315,7 @@
     }
 
     #plus:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      background: #3c5e8b;;
     }
 
     #minussymbol {
@@ -469,10 +335,10 @@
       right: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
     }
@@ -495,12 +361,16 @@
       right: 30px;
       height: 70px;
       width: 70px;
-      border-radius: 30px;
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      border-radius: 50px;
+      background: #3c5e8b;;
       cursor: pointer;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
 
       transition: transform .2s;
+    }
+
+    #refresh:hover {
+      transform: scale(1.1);
     }
 
     #minus:hover {
@@ -508,7 +378,7 @@
     }
 
     #minus:active {
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+      background: #3c5e8b;;
     }
 
     #coo {
@@ -550,6 +420,7 @@
       left: 205px;
       width: 100px;
       background-color: #000000;
+      outline: none;
       color: white;
       text-align: center;
       font-family: 'Balsamiq Sans', cursive;
@@ -557,14 +428,11 @@
       font-weight: normal;
       font-size: 14px;
       line-height: 18px;
-      border-radius: 10px;
       cursor: pointer;
     }
 
     .button:hover {
-
-      background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
-
+      background: #1d324e;
     }
 
     #price {
@@ -617,18 +485,17 @@
       display: inline;
       top: 0px;
       left: 0px;
-      box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+      box-shadow: 0 0 21px 5px rgba(0, 0, 0, 1);
       width: 325px;
       height: 150px;
-      background-color: #08bff1;
-      border-radius: 30px;
+      background-color: #3c5e8b;
     }
 
     body {
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background-color: #2E2E2E;
+      background-color: black;
     }
 
   </style>
@@ -636,9 +503,6 @@
 
 
 <body>
-<div>
-  <p id="nb_text">Pixels placed:</p>
-</div>
 
 <div id="infopanel">
   <div id="inforect"></div>
@@ -655,7 +519,6 @@
 
 <div id="buttons">
   <div id="gridON" value="OFF">
-    <img id="table" src="table.svg"/>
   </div>
   <div id="twitter" onclick="window.open('https://twitter.com/harmural','mywindow');">
     <img id="twitterlogo" src="twitter.svg"/>
@@ -691,6 +554,9 @@
 <div id="logo">
   <img src="./banner.png" alt="banner"
        style="width:250px; position:absolute; top: 50px; left: 50%; margin-left: -125px;">
+  <div>
+    <p id="nb_text">Pixels placed:</p>
+  </div>
 </div>
 
 <img id="canvasImage" src="" style="display: none">
@@ -763,7 +629,7 @@
     console.log(web3)
   } else {
     console.log('No connection');
-    web3 = new Web3(new Web3.providers.WebsocketProvider('wss://ws.s0.pops.one/'));
+    web3 = new Web3(new Web3.providers.WebsocketProvider('wss://ws.s0.b.hmny.io/'));
   }
 
 
@@ -771,7 +637,7 @@
 
   currnet.then(function (result) {
     console.log(result);
-    if (result !== 1666700000) {
+    if (result !== 1666600000) {
       console.log(result);
       document.getElementById("network").style.display = "inline";
     }
@@ -783,82 +649,254 @@
   });
 
 
-  const abi = [{
-    "anonymous": false,
-    "inputs": [{"indexed": false, "internalType": "uint256", "name": "x", "type": "uint256"}, {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "y",
-      "type": "uint256"
-    }, {"indexed": false, "internalType": "address", "name": "owner", "type": "address"}, {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "soldPrice",
-      "type": "uint256"
-    }, {"indexed": false, "internalType": "bytes3", "name": "color", "type": "bytes3"}],
-    "name": "PixelChanged",
-    "type": "event"
-  }, {
-    "inputs": [],
-    "name": "NumberPixelChanged",
-    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [],
-    "name": "basePrice",
-    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256[]", "name": "x", "type": "uint256[]"}, {
-      "internalType": "uint256[]",
-      "name": "y",
-      "type": "uint256[]"
-    }, {"internalType": "bytes3[]", "name": "color", "type": "bytes3[]"}],
-    "name": "colorMultiplePixel",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256", "name": "x", "type": "uint256"}, {
-      "internalType": "uint256",
-      "name": "y",
-      "type": "uint256"
-    }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
-    "name": "colorPixel",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  }, {
-    "inputs": [],
-    "name": "getBalance",
-    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}, {
-      "internalType": "uint256",
-      "name": "",
-      "type": "uint256"
-    }],
-    "name": "pixels",
-    "outputs": [{"internalType": "address", "name": "owner", "type": "address"}, {
-      "internalType": "uint256",
-      "name": "soldPrice",
-      "type": "uint256"
-    }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256", "name": "amount", "type": "uint256"}],
-    "name": "withdraw",
-    "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }];
+  const abi = [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "x",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "y",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "soldPrice",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes3",
+          "name": "color",
+          "type": "bytes3"
+        }
+      ],
+      "name": "PixelChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "x",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "y",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "bytes3[]",
+          "name": "color",
+          "type": "bytes3[]"
+        }
+      ],
+      "name": "colorMultiplePixel",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "x",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "y",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes3",
+          "name": "color",
+          "type": "bytes3"
+        }
+      ],
+      "name": "colorPixel",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "basePrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "NumberPixelChanged",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "pixels",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "soldPrice",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes3",
+          "name": "color",
+          "type": "bytes3"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "users",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalPixels",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentPixels",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ];
 
-  const address = '0x7a1f208DD13E43cD974ABAFB0B8a1BACfa009f81';
+  const address = '0xd70169cCE562Cd53F557D2332B923EC7faE7C63A';
 
   contract = new web3.eth.Contract(abi, address);
 
@@ -869,151 +907,33 @@
   });
 
 
-  /*window.onload = function() {
-    const api_url = "https://oneplace-canvas.herokuapp.com/";
-    async function getDataURL() {
-      const response = await fetch(api_url);
-      const data = await response.text();
-      console.log(data);
-    }
-    getDataURL();
-  };*/
-
-
-
-
-  /*function writePixelWithEvent(event) {
-        let { x, y, color } = event.returnValues;
-        writePixel(
-          parseInt(x),
-          parseInt(y),
-          parseColor(color)
-        );
-      }
-
-
-  function parseColor(rawColor) {
-    let rgb = [];
-    for (let i = 0; i < rawColor.length; i += 2) {
-      let chunk = rawColor.substring(i, i + 2);
-      if (chunk !== '0x') {
-        rgb.push(parseInt(chunk, 16).toString(10));
-      }
-    }
-    return rgb;
-  }*/
-
   let canvas = document.getElementById('canvas');
   let ctx = canvas.getContext('2d');
   let img = document.getElementById("canvasImage");
 
-
-  /*function writePixel(x, y, color) {
-
-    let imageData = ctx.getImageData(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-    );
-    let data = imageData.data;
-
-    // grab the existing image data
-
-    // notice that canvas is in scope here
-    let columns = canvas.width;
-    let rows = canvas.height;
-
-    // Now, finding the index is a little tricky, because the image data is a
-    // one-dimensional array.
-    //
-    // How do we find the index in a one-dimensional array? First we'll take the
-    // y-value times the number of columns plus the x value, times 4. Why four?
-    // Because we have one byte per channel per pixel.
-    //
-    // If that seems confusing, try to work it out on paper, but honestly
-    // understanding the layout of this image array it's not that crucial to building
-    // this app. This _is_ how you find the index.
-
-    let i = (y * columns + x) * 4;
-
-    // Now we will assign the pixel in data each channel of our pixel in color.
-    data[i] = color[0];
-    data[i + 1] = color[1];
-    data[i + 2] = color[2];
-
-
-    // I want every pixel to be opaque, that is, no transparency, so I'll set the
-    // alpha channel to 255. If you don't do this, your pixels will be invisible.
-    data[i + 3] = 255; // alpha
-
-    // And lastly, we put the image data back into the canvas.
-    // You might see this and realize that we're rewriting the canvas on every pixel.
-    // You could certainly batch these updates, but we're not going to, just for
-    // simplicity.
-    ctx.putImageData(imageData, 0, 0);
-
-    /*ctx.fillStyle = "rgba("+color[0]+","+color[1]+","+color[2]+","+255+")";
-    ctx.fillRect( x, y, 1, 1 );
-
-
-    canvas.toBlob((blob) => {
-      img.src = URL.createObjectURL(blob);
-      imageObj.src = img.src;
-    })*/
-
-  /*canvas.toBlob((blob) => {
-    img.src = URL.createObjectURL(blob);
-    imageObj.src = img.src;
-    blocknb++
-    if (blocknb == pastblocks) {
-      console.log("done")
-    }
-    //console.log(URL.createObjectURL(blob))
-  })
-
-
-
-  layer.batchDraw();
-
-
-  }*/
-
-
-
-
-
-
-
-  /*contract.getPastEvents(
-    'PixelChanged',
-    {
-      fromBlock: pastblocks
-    },
-    function(error, events) {
-      console.log('events : ', events);
-
-      pastblocks = events.length;
-      console.log(pastblocks)
-      events.map(e => writePixelWithEvent(e));
-    }
-  );*/
-
   web3.eth.getBlockNumber(function (error, blocknumber) {
+    let lastBlock = blocknumber;
+
     contract.events.PixelChanged(
       {
-        fromBlock: blocknumber
+        fromBlock: blocknumber,
       },
       function (error, event) {
         //writePixelWithEvent(event);
-        console.log("new: " + event)
-        web3.eth.call({to: address, data: "0x3bdcd32f"}).then(function (amount) {
-          let nb = web3.utils.hexToNumber(amount);
-          document.getElementById('nb_text').textContent = "Pixels placed: " + nb;
-        });
+        console.log("new: " + event);
+        if (event && event.blockNumber > lastBlock) {
+          lastBlock = event.blockNumber;
+          web3.eth
+            .call({to: address, data: "0x3bdcd32f"})
+            .then(function (amount) {
+              let nb = web3.utils.hexToNumber(amount);
+              document.getElementById("nb_text").textContent =
+                "Pixels placed: " + nb;
+            });
+        }
       }
     );
-  })
+  });
 
 
   let imageLine = new Image();
@@ -1080,13 +1000,10 @@
     layer.batchDraw();
   };
 
-  //let imageCanvas = document.getElementById('canvas');
-  //let img = document.getElementById("canvasImage");
-
   let dataU;
 
 
-  fetch('http://localhost:3000/dataURL.txt')
+  fetch('http://165.22.199.153:8081/dataURL.txt')
     .then(function (response) {
       if (draw !== "draw" || draw !== "eraser") {
         console.log(response.body);
@@ -1112,32 +1029,8 @@
       }
     });
 
-
-  //imageObj.src = Canvas2Image.convertToPNG(imageCanvas);
-
   let grouplines = new Konva.Group();
   layer.add(grouplines);
-
-
-  /*for (i = 0; i < 1001; i++) {
-    let lineX1 = width/4 + height/4 + i * height/2 / 1000;
-    let lineY1 = height/4;
-    let lineX2 = width/4 + height/4 + i * height/2 / 1000;
-    let lineY2 = 3 * height/4;
-    let linever = new Konva.Line({
-        points: [lineX1, lineY1, lineX2, lineY2],
-        stroke: '#adadad',
-        strokeWidth: 0.03
-    });
-    grouplines.add(linever);
-    let linehor = new Konva.Line({
-        points: [lineY2 + height/2 +11.5, lineX2 - height/2 - 11.5, lineY1 + height/2 + 11.5, lineX1 - height/2 -11.5],
-        stroke: '#adadad',
-        strokeWidth: 0.03
-    });
-    grouplines.add(linehor);
-  }*/
-
 
   imageLine.src = './grid.png';
   document.getElementById("gridON").value = "Off";
@@ -1155,7 +1048,7 @@
     document.getElementById("colorprice").style.display = 'none';
 
     if (draw !== "draw" || draw !== "eraser") {
-      fetch('http://localhost:3000/dataURL.txt').then(function (response) {
+      fetch('http://165.22.199.153:8081:8081/dataURL.txt').then(function (response) {
         console.log(response.body);
         response.text().then(function (text) {
           imageObj.src = text;
@@ -1174,7 +1067,6 @@
       y: height / 2
     };
 
-    //let pointer = stage.getPointerPosition();
     console.log(pointer)
 
     let mousePointTo = {
@@ -1279,8 +1171,6 @@
       let posX = parseInt((4000 / height / 2.96298) * (pos.x - (width / 2 - height / 2.7)));
       let posY = parseInt((4000 / height / 2.96298) * (pos.y - height / 4.5));
 
-      //let posX = parseInt(4000 / height/2 * (pos.x - (width/2 - height/2.7)));
-      //let posY = parseInt(4000 / height/2 * (pos.y - height/1.35) - 1000);
       let coo = {x: posX, y: posY};
 
       let rect = document.getElementById('infopanel');
@@ -1316,10 +1206,6 @@
       rect.style.display = 'inline'
       rect.style.left = stage.getPointerPosition().x + 100 + 'px'
       rect.style.top = stage.getPointerPosition().y - 25 + 'px'
-      //button.style.display = 'inline'
-      //button.style.left = window.event.clientX + 70 + 'px'
-      //button.style.top = window.event.clientY + 65 + 'px'
-
 
       layer.batchDraw();
     } else if (draw == "draw") {
@@ -1492,10 +1378,7 @@
       //console.log(URL.createObjectURL(blob))
     })
 
-
     layer.batchDraw();
-
-
   }
 
   document.getElementById("gridON").addEventListener("click", function () {

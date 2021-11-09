@@ -16,7 +16,7 @@
 
 </head>
 
-<body style="background-color: #2E2E2E">
+<body style="background-color: #000000">
 
 <style>
   img {
@@ -39,7 +39,6 @@
 
     border: 1px solid #FFFFFF;
     box-sizing: border-box;
-    border-radius: 9px;
   }
 
   #imagey {
@@ -52,7 +51,6 @@
 
     border: 1px solid #FFFFFF;
     box-sizing: border-box;
-    border-radius: 9px;
   }
 
   #x {
@@ -145,8 +143,7 @@
 
     color: #FFFFFF;
 
-    background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%);
-    border-radius: 40px;
+    background: #3c5e8b;
     cursor: pointer;
   }
 
@@ -159,8 +156,7 @@
     top: 47%;
     transform: translate(-50%, -50%);
 
-    background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%);
-    background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%);
+    background: #3c5e8b;
     opacity: 1;
     filter: blur(20px);
   }
@@ -201,7 +197,7 @@
 
     color: #FFFFFF;
 
-    background: radial-gradient(circle, #08bff1 0%, #3edbe4 73%, #74fdcf);
+    background: #3c5e8b;
     border: 0px;
     border-radius: 40px;
     display: none;
@@ -234,7 +230,7 @@
 
     color: #FFFFFF;
 
-    background: radial-gradient(circle, #08bff1 0%, #000000 73%);
+    background: #3c5e8b;
     border: 0px;
     border-radius: 40px;
   }
@@ -278,11 +274,11 @@
   3. Click on the play button and wait few seconds for the Metamask pop up<br><br>
 
   Be careful to upload a small image because the size of it will directly influence the number of pixel on the canvas. A
-  900 pixel (30x30) image will correspond to an image of 900 pixels on the canvas.
+  150 pixel (15x10) image will correspond to an image of 150 pixels on the canvas.
 
   N.B : If you use a png image, transparent pixel will not be integrated to the canvas.<br>
 
-  Because of contract loops, you cannot upload images bigger than 900 pixels. If you want to upload bigger images, please
+  Because of contract loops, you cannot upload images bigger than 150 pixels. If you want to upload bigger images, please
   split your image into multiple smaller images.
 
 </p>
@@ -293,7 +289,7 @@
   <img id="play" src="./play.svg"></img>
 
 </button>
-<button id="back" onclick="window.location.href='/index.html'">
+<button id="back" onclick="window.location.href='/'">
   <img id="arrow" src="./Back_Arrow.svg"></img>
 </button>
 
@@ -361,19 +357,19 @@
             color.push(code);
           }
 
-          if (x.length > 900) {
+          if (x.length > 999999999999) {
             document.getElementById("bigerror").style.display = "block";
             break
           }
         }
 
-        if (x.length > 900) {
+        if (x.length > 999999999999) {
           document.getElementById("bigerror").style.display = "block";
           break
         }
       }
 
-      if (x.length <= 900) {
+      if (x.length <= 999999999999) {
         console.log(x, y, color)
         document.getElementById("tocanvas").style.display = "block";
       }
@@ -390,87 +386,87 @@
     web3 = new Web3(window.web3.currentProvider);
   } else {
     console.log('No connection');
-    web3 = new Web3(new Web3.providers.WebsocketProvider('wss://ws.s0.pops.one/'));
+    web3 = new Web3(new Web3.providers.WebsocketProvider('wss://ws.s0.b.hmny.io/'));
   }
   console.log(window.web3.currentProvider)
 
   // contractAddress and abi are setted after contract deploy
-  let contractAddress = '0x7a1f208DD13E43cD974ABAFB0B8a1BACfa009f81';
+  let contractAddress = '0xd70169cCE562Cd53F557D2332B923EC7faE7C63A';
   let abi = [
     {
-    "anonymous": false,
-    "inputs": [{"indexed": false, "internalType": "uint256", "name": "x", "type": "uint256"}, {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "y",
-      "type": "uint256"
-    }, {"indexed": false, "internalType": "address", "name": "owner", "type": "address"}, {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "soldPrice",
-      "type": "uint256"
-    }, {"indexed": false, "internalType": "bytes3", "name": "color", "type": "bytes3"}],
-    "name": "PixelChanged",
-    "type": "event"
-  }, {
-    "inputs": [],
-    "name": "NumberPixelChanged",
-    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [],
-    "name": "basePrice",
-    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256[]", "name": "x", "type": "uint256[]"}, {
-      "internalType": "uint256[]",
-      "name": "y",
-      "type": "uint256[]"
-    }, {"internalType": "bytes3[]", "name": "color", "type": "bytes3[]"}],
-    "name": "colorMultiplePixel",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256", "name": "x", "type": "uint256"}, {
-      "internalType": "uint256",
-      "name": "y",
-      "type": "uint256"
-    }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
-    "name": "colorPixel",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  }, {
-    "inputs": [],
-    "name": "getBalance",
-    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}, {
-      "internalType": "uint256",
-      "name": "",
-      "type": "uint256"
-    }],
-    "name": "pixels",
-    "outputs": [{"internalType": "address", "name": "owner", "type": "address"}, {
-      "internalType": "uint256",
-      "name": "soldPrice",
-      "type": "uint256"
-    }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
-    "stateMutability": "view",
-    "type": "function"
-  }, {
-    "inputs": [{"internalType": "uint256", "name": "amount", "type": "uint256"}],
-    "name": "withdraw",
-    "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
+      "anonymous": false,
+      "inputs": [{"indexed": false, "internalType": "uint256", "name": "x", "type": "uint256"}, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "y",
+        "type": "uint256"
+      }, {"indexed": false, "internalType": "address", "name": "owner", "type": "address"}, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "soldPrice",
+        "type": "uint256"
+      }, {"indexed": false, "internalType": "bytes3", "name": "color", "type": "bytes3"}],
+      "name": "PixelChanged",
+      "type": "event"
+    }, {
+      "inputs": [],
+      "name": "NumberPixelChanged",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    }, {
+      "inputs": [],
+      "name": "basePrice",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    }, {
+      "inputs": [{"internalType": "uint256[]", "name": "x", "type": "uint256[]"}, {
+        "internalType": "uint256[]",
+        "name": "y",
+        "type": "uint256[]"
+      }, {"internalType": "bytes3[]", "name": "color", "type": "bytes3[]"}],
+      "name": "colorMultiplePixel",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    }, {
+      "inputs": [{"internalType": "uint256", "name": "x", "type": "uint256"}, {
+        "internalType": "uint256",
+        "name": "y",
+        "type": "uint256"
+      }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
+      "name": "colorPixel",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    }, {
+      "inputs": [],
+      "name": "getBalance",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    }, {
+      "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}, {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }],
+      "name": "pixels",
+      "outputs": [{"internalType": "address", "name": "owner", "type": "address"}, {
+        "internalType": "uint256",
+        "name": "soldPrice",
+        "type": "uint256"
+      }, {"internalType": "bytes3", "name": "color", "type": "bytes3"}],
+      "stateMutability": "view",
+      "type": "function"
+    }, {
+      "inputs": [{"internalType": "uint256", "name": "amount", "type": "uint256"}],
+      "name": "withdraw",
+      "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
   ];
 
   //contract instance
@@ -488,7 +484,7 @@
   async function arrayPixel() {
     document.getElementById("bigerror").style.display = "none";
 
-    if (x.length > 900) {
+    if (x.length > 999999) {
       document.getElementById("bigerror").style.display = "block";
       return
     }
