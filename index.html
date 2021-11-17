@@ -1003,7 +1003,7 @@
   let dataU;
 
 
-  fetch('http://165.22.199.153:8081/dataURL.txt')
+  fetch('https://test-api.harmural.one/dataURL.txt')
     .then(function (response) {
       if (draw !== "draw" || draw !== "eraser") {
         console.log(response.body);
@@ -1048,7 +1048,7 @@
     document.getElementById("colorprice").style.display = 'none';
 
     if (draw !== "draw" || draw !== "eraser") {
-      fetch('http://165.22.199.153:8081:8081/dataURL.txt').then(function (response) {
+      fetch('https://test-api.harmural.one/dataURL.txt').then(function (response) {
         console.log(response.body);
         response.text().then(function (text) {
           imageObj.src = text;
